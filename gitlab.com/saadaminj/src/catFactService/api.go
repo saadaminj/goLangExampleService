@@ -17,6 +17,9 @@ func NewApiServer(svc Service) *ApiServer {
 
 func (s *ApiServer) Start(listenAddr string) error {
 	http.HandleFunc("/getCatFact", s.handleGetCatFact)
+	http.HandleFunc("/login", Login)
+	http.HandleFunc("/home", Home)
+	http.HandleFunc("/refresh", Refresh)
 	return http.ListenAndServe(listenAddr, nil)
 }
 

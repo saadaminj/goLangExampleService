@@ -26,6 +26,17 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
+func Logout(w http.ResponseWriter, r *http.Request) {
+	http.SetCookie(w,
+		&http.Cookie{
+			Name:    "token",
+			Value:   "",
+			Expires: time.Unix(0, 0),
+		},
+	)
+	w.WriteHeader(http.StatusOK)
+}
+
 func Login(w http.ResponseWriter, r *http.Request) {
 	var credentials Credentials
 	err := json.NewDecoder(r.Body).Decode(&credentials)
